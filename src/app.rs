@@ -157,6 +157,11 @@ impl App {
         };
     }
 
+    /// Focus a specific panel directly (bound to the number keys).
+    pub fn focus_panel(&mut self, panel: Panel) {
+        self.focus = panel;
+    }
+
     /// Move the selection in whichever pane has focus. `delta` is +1 or -1.
     pub fn move_selection(&mut self, delta: isize) {
         let (state, len) = match self.focus {
@@ -210,4 +215,3 @@ impl App {
         Ok(())
     }
 }
-

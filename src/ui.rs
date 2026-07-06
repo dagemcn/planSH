@@ -136,7 +136,7 @@ fn render_assignments(frame: &mut Frame, app: &mut App, area: Rect) {
 fn render_hint(frame: &mut Frame, app: &mut App, area: Rect) {
     // Context-sensitive, like lazygit's bottom bar.
     let keys = match app.mode {
-        Mode::Normal => "j/k move · Tab panel · space status · a add · d delete · q quit",
+        Mode::Normal => "j/k move · Tab/1-3 panel · space status · a add · d delete · q quit",
         Mode::Adding => "type · Enter save · Esc cancel",
         Mode::ConfirmDelete => "y confirm · n cancel",
     };

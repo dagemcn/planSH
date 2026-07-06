@@ -15,7 +15,7 @@ mod db;
 mod models;
 mod ui;
 
-use app::{App, Mode};
+use app::{App, Mode, Panel};
 use chrono::{Duration, Local};
 use db::Db;
 use models::Status;
@@ -68,9 +68,15 @@ fn run(
 fn handle_normal(app: &mut App, code: KeyCode) {
     match code {
         KeyCode::Char('q') => app.should_quit = true,
-        KeyCode::Char('j') | KeyCode::Down => app.move_selection(1),
-        KeyCode::Char('k') | KeyCode::Up => app.move_selection(-1),
+        // j/k swapped from the vim default per preference: k moves down, j up.
+        // Arrow keys stay conventional.
+        KeyCode::Char('k') | KeyCode::Down => app.move_selection(1),
+        KeyCode::Char('j') | KeyCode::Up => app.move_selection(-1),
+        // Jump straight to a panel by number, lazygit-style. Tab still cycles.
         KeyCode::Tab => app.focus_next(),
+        KeyCode::Char('1') => app.focus_panel(Panel::Views),
+        KeyCode::Char('2') => app.focus_panel(Panel::Courses),
+        KeyCode::Char('3') => app.focus_panel(Panel::Assignments),
         KeyCode::Char(' ') => {
             // Cycle status of the highlighted assignment.
             let _ = app.cycle_status();
